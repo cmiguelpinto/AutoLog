@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="pt">
 <head>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>AutoLog Preview</title>
@@ -31,18 +30,6 @@ button,input,select{font-family:inherit}button{cursor:pointer;border:0;backgroun
 </style>
 </head>
 <body>
-  <div id="loginView" class="login-view">
-  <div class="login-card">
-    <h1>AutoLog</h1>
-    <p>Login para aceder aos teus dados</p>
-
-    <input id="loginEmail" type="email" placeholder="Email">
-    <input id="loginPassword" type="password" placeholder="Password">
-
-    <button onclick="signIn()">Entrar</button>
-    <button onclick="signUp()" class="secondary">Criar conta</button>
-  </div>
-</div>
 <div class="app">
 <header class="top"><div class="status"><div class="brand"><div class="mark"><i class="ti ti-car"></i></div><div><h1>AutoLog</h1><span>Car management · by Carlos Pinto</span></div></div><button class="iconBtn" onclick="exportData()"><i class="ti ti-download"></i></button></div><div class="garage" id="garagePills"></div><div class="heroCard"><div class="carName" id="heroName">—</div><div class="carMeta" id="heroMeta">—</div><div class="plateWrap" id="platePreview"></div><div class="odometer"><div><div class="odoLabel">Odómetro</div><div class="odoValue" id="heroOdo">— <small>km</small></div></div><button class="quickAdd" onclick="navByName('garage')">Configurar</button></div><div class="statRow"><div class="miniStat"><span>Total</span><strong class="yellowTxt" id="sTotal">—</strong></div><div class="miniStat"><span>Litros</span><strong id="sLiters">—</strong></div><div class="miniStat"><span>L/100</span><strong class="greenTxt" id="sAvg">—</strong></div></div></div></header>
 <main class="content"><section id="screen-overview" class="screen active"></section><section id="screen-fuel" class="screen"></section><section id="screen-service" class="screen"></section><section id="screen-costs" class="screen"></section><section id="screen-garage" class="screen"></section></main>
@@ -249,7 +236,4 @@ function openQuickOdo(){const v=prompt('Novo odómetro atual:',car().odo||'');if
 function addCar(){const id='car'+Date.now();S.cars.push({id,brand:'',model:'',year:'',fuel:'',plate:'',regYear:'',regMonth:'',odo:0,insurance:'',inspection:'',iuc:''});S.active=id;save();render();navByName('garage')}function exportData(){const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='autolog-backup.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exportado')}
 render();
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
-<script src="app.js"></script>
 </body></html>
