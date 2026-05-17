@@ -237,4 +237,7 @@ function openQuickOdo(){const v=prompt('Novo odómetro atual:',car().odo||'');if
 function addCar(){const id='car'+Date.now();S.cars.push({id,brand:'',model:'',year:'',fuel:'',plate:'',regYear:'',regMonth:'',odo:0,insurance:'',inspection:'',iuc:''});S.active=id;save();render();navByName('garage')}function exportData(){const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='autolog-backup.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exportado')}
 render();
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="app.js"></script>
 </body></html>
