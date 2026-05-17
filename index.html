@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>AutoLog Preview</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root{--ink:#10131b;--muted:#697087;--soft:#a8afc2;--line:rgba(16,19,27,.08);--bg:#f5f6fa;--card:#fff;--yellow:#f7c948;--green:#18b66a;--red:#ef4455;--blue:#3d8cff;--purple:#9b5cff;--shadow:0 8px 24px rgba(16,19,27,.08)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#dfe3ec;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,system-ui,sans-serif;color:var(--ink)}
+button,input,select{font-family:inherit}button{cursor:pointer;border:0;background:none;color:inherit}
+.app{min-height:100vh;max-width:480px;margin:0 auto;background:linear-gradient(180deg,#f7f8fc,#eef1f8);position:relative;padding-bottom:92px}
+.top{background:radial-gradient(circle at 78% -8%,rgba(247,201,72,.4),transparent 42%),linear-gradient(135deg,#0e111a,#1b2130);padding:18px 18px 24px;border-bottom-left-radius:32px;border-bottom-right-radius:32px;color:white}
+.status{display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px}.mark{width:38px;height:38px;border-radius:14px;background:var(--yellow);color:#10131b;display:grid;place-items:center;font-size:22px;font-weight:900}.brand h1{font-size:20px}.brand span{display:block;font-size:12px;color:#aeb6cc;font-weight:650}.iconBtn{width:40px;height:40px;border-radius:15px;background:rgba(255,255,255,.09);color:#e9edf7;display:grid;place-items:center;font-size:21px;border:1px solid rgba(255,255,255,.08)}
+.garage{display:flex;gap:8px;overflow-x:auto;margin:18px -18px 16px;padding:0 18px}.pill{flex:0 0 auto;padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);font-size:13px;font-weight:750;color:#b6bed2}.pill.active{background:var(--yellow);color:#11151f}
+.heroCard{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:26px;padding:16px;backdrop-filter:blur(14px)}.carName{font-size:27px;line-height:1.02;font-weight:950;letter-spacing:-1px}.carMeta{color:#bac2d5;font-size:13px;font-weight:650;margin-top:5px}.odometer{margin-top:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px}.odoLabel{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#98a1b7;font-weight:850}.odoValue{font-size:34px;font-weight:950}.odoValue small{font-size:16px;color:#aeb6cc}.quickAdd{background:var(--yellow);color:#11151f;padding:10px 13px;border-radius:15px;font-weight:900;font-size:13px}
+.statRow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.miniStat{background:rgba(0,0,0,.18);border-radius:17px;padding:10px 9px}.miniStat span{display:block;font-size:10px;color:#9fa8bd;text-transform:uppercase;letter-spacing:.08em;font-weight:850}.miniStat strong{display:block;margin-top:4px;font-size:16px;font-weight:950;color:#fff}.yellowTxt{color:var(--yellow)!important}.greenTxt{color:#49df94!important}
+.content{padding:18px;display:flex;flex-direction:column;gap:16px}.sectionHead{display:flex;align-items:center;justify-content:space-between;margin:2px 2px -6px}.sectionHead h2{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:#6d7489;font-weight:950}.sectionHead button{font-size:13px;font-weight:850;color:#11151f;background:#fff;padding:7px 11px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.7);overflow:hidden}.cardPad{padding:16px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.welcomeCard{background:linear-gradient(145deg,#fff,#f3f5fb);border-radius:26px;padding:18px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.9)}.welcomeTop{display:flex;gap:13px;align-items:flex-start}.welcomeIcon{width:48px;height:48px;border-radius:18px;background:#10131b;color:var(--yellow);display:grid;place-items:center;font-size:25px;flex:0 0 auto}.welcomeCard h3{font-size:20px;letter-spacing:-.5px;margin-bottom:4px}.welcomeCard p{font-size:14px;color:var(--muted);font-weight:700;line-height:1.35}.overviewService{display:flex;gap:14px;align-items:center;padding:16px}.overviewServiceIcon{width:52px;height:52px;border-radius:18px;background:#10131b;color:var(--yellow);display:grid;place-items:center;font-size:25px;flex:0 0 auto}.overviewServiceInfo{flex:1;min-width:0}.overviewServiceInfo span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:950}.overviewServiceInfo strong{display:block;font-size:22px;letter-spacing:-.5px;margin-top:3px}.overviewServiceInfo p{font-size:13px;color:var(--muted);font-weight:800;margin-top:2px}.miniProgress{height:7px;background:#edf0f6;border-radius:99px;margin-top:10px;overflow:hidden}.miniProgress div{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow));border-radius:99px}.docCard{padding:14px;min-height:126px}.docIcon{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;font-size:20px;background:#eef1f7;color:#8b93a7}.docCard.ok .docIcon{background:#e9fbf2;color:var(--green)}.docCard.warn .docIcon{background:#fff5dd;color:#b67a00}.docCard.due .docIcon{background:#ffecef;color:var(--red)}.docLabel{font-size:10px;font-weight:950;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;margin-top:12px}.docValue{font-size:24px;font-weight:950;letter-spacing:-.7px;margin-top:2px}.docDate{font-size:12px;color:var(--soft);font-weight:700;margin-top:1px}.quickHint{font-size:12px;color:#8a92a6;font-weight:750;margin-top:8px}
+.actionGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.action{background:white;border-radius:20px;box-shadow:var(--shadow);padding:14px 6px;text-align:center;min-width:0}.action i{font-size:24px}.action span{display:block;font-size:11px;font-weight:850;color:#596078;margin-top:6px}.action.y i{color:#e9a923}.action.b i{color:var(--blue)}.action.g i{color:var(--green)}.action.p i{color:var(--purple)}
+.form{display:none;gap:12px;flex-direction:column}.form.active{display:flex}.inputRow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:block;font-size:12px;color:var(--muted);font-weight:850;margin-bottom:5px}.field input,.field select{width:100%;border:1.5px solid #e3e7ef;background:#f7f8fb;border-radius:15px;padding:12px;font-size:15px;outline:none;color:#11151f}.field input:focus,.field select:focus{border-color:var(--yellow);background:white}.calcBox{background:#f7f8fb;border:1.5px solid #e3e7ef;border-radius:16px;padding:12px;display:grid;gap:5px}.calcBox span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:950}.calcBox strong{font-size:20px;letter-spacing:-.4px}.discountToggle{display:flex;align-items:center;gap:10px;background:#f7f8fb;border:1.5px solid #e3e7ef;border-radius:16px;padding:12px;font-size:14px;font-weight:850;color:#3e4658;cursor:pointer}.discountToggle input{width:20px;height:20px;accent-color:var(--yellow)}.discountPanel{display:none}.discountPanel.active{display:block}.primary{width:100%;background:#10131b;color:white;border-radius:16px;padding:14px;font-size:15px;font-weight:950}.secondary{width:100%;background:#edf0f6;color:#596078;border-radius:16px;padding:14px;font-size:15px;font-weight:900}
+.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:rgba(255,255,255,.88);backdrop-filter:blur(20px);border-top:1px solid rgba(0,0,0,.06);padding:7px 10px calc(7px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,1fr);z-index:5}.tab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px;border-radius:16px;color:#9ca4b7;font-size:10px;font-weight:800}.tab i{font-size:22px}.tab.active{color:#11151f;background:#fff3cc}.tab.active i{color:#e3a600}
+.list{display:flex;flex-direction:column}.listItem{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.listItem:last-child{border-bottom:none}.liMain{font-size:15px;font-weight:900}.liSub{font-size:12px;color:var(--muted);font-weight:700;margin-top:2px}.amount{font-size:15px;font-weight:950;text-align:right}.badge{display:inline-flex;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:900;background:#ecf7ff;color:#1d65b8;margin-top:6px}.empty{padding:30px 18px;text-align:center;color:var(--soft);font-weight:750}.empty i{display:block;font-size:34px;margin-bottom:8px}
+.plateWrap{margin-top:8px}.plateShell{display:inline-grid;grid-template-columns:20px 96px 22px;align-items:center;height:28px;padding:2px;border-radius:10px;background:linear-gradient(145deg,rgba(255,255,255,.18),rgba(255,255,255,.055));border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 8px 18px rgba(0,0,0,.13);backdrop-filter:blur(14px);overflow:hidden}.plateEU{height:100%;display:flex;align-items:center;justify-content:center;color:#eef3ff;font-weight:950;border-right:1px solid rgba(255,255,255,.12)}.plateCode{height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:950;font-size:13px;letter-spacing:1.35px;white-space:nowrap;padding-left:3px;text-shadow:0 1px 7px rgba(0,0,0,.35)}.plateDate{height:100%;color:#f7c948;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:950;font-size:7px;line-height:.95;border-left:1px solid rgba(255,255,255,.12)}.plateDate .sep{width:12px;height:1px;background:rgba(247,201,72,.75);margin:2px 0;border-radius:99px}.plateEmpty{background:rgba(255,255,255,.08);color:#aeb6cc;border:1px dashed rgba(255,255,255,.18);border-radius:16px;padding:10px 12px;font-size:13px;font-weight:800}.garagePlatePreview{margin-top:14px;display:flex;justify-content:center}.garagePlatePreview .plateShell{height:48px;grid-template-columns:36px 186px 42px;padding:3px;border-radius:14px;background:linear-gradient(145deg,rgba(16,19,27,.08),rgba(16,19,27,.025));border:1px solid rgba(16,19,27,.1);box-shadow:0 12px 30px rgba(16,19,27,.12),inset 0 1px 0 rgba(255,255,255,.95)}.garagePlatePreview .plateEU{color:#283044;border-right:1px solid rgba(16,19,27,.1)}.garagePlatePreview .plateCode{color:#10131b;font-size:24px;letter-spacing:2.8px;padding-left:5px;text-shadow:none}.garagePlatePreview .plateDate{color:#b77900;font-size:13px;border-left:1px solid rgba(16,19,27,.1)}.garagePlatePreview .plateDate .sep{width:22px;height:2px;margin:3px 0;background:rgba(183,121,0,.75)}
+.serviceGrid{display:grid;grid-template-columns:1fr;gap:8px}.servicePick{display:flex;align-items:center;gap:10px;background:#f7f8fb;border:1.5px solid #e3e7ef;border-radius:15px;padding:10px 12px;font-size:14px;font-weight:850;color:#3e4658;cursor:pointer}.servicePick input{display:none}.servicePick:has(input:checked){background:#fff7d9;border-color:#f7c948;color:#10131b}.pickIcon{width:30px;height:30px;border-radius:11px;background:#fff;display:grid;place-items:center;color:#8b93a7}.servicePick:has(input:checked) .pickIcon{background:#10131b;color:#f7c948}.itemActions{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}.smallBtn{border-radius:999px;padding:6px 10px;font-size:11px;font-weight:900;background:#eef1f7;color:#5d6578}.smallBtn.danger{background:#ffecef;color:#cf3144}
+.screen{display:none}.screen.active{display:flex;flex-direction:column;gap:16px}.toast{position:fixed;left:50%;bottom:95px;transform:translateX(-50%) translateY(20px);background:#10131b;color:#fff;padding:12px 16px;border-radius:999px;font-size:13px;font-weight:850;opacity:0;pointer-events:none;transition:.25s;z-index:9}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modalBackdrop{position:fixed;inset:0;background:rgba(8,10,15,.46);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:22px;z-index:20}.modalBackdrop.show{display:flex}.confirmBox{width:min(340px,100%);background:white;border-radius:26px;padding:20px;box-shadow:0 24px 70px rgba(0,0,0,.28);text-align:center}.confirmIcon{width:54px;height:54px;border-radius:19px;background:#ffecef;color:#cf3144;display:grid;place-items:center;font-size:27px;margin:0 auto 13px}.confirmBox h3{font-size:20px;margin-bottom:6px}.confirmBox p{font-size:14px;color:var(--muted);font-weight:700;margin-bottom:16px}.confirmActions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.confirmActions .yes{background:#cf3144}
+.costHero{background:#10131b;color:white;border-radius:28px;padding:18px;box-shadow:var(--shadow)}.costTop{display:flex;align-items:center;justify-content:space-between}.costTop span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9fa8bd;font-weight:950}.costTop h3{font-size:34px;letter-spacing:-1px;margin-top:3px}.donut{width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--yellow) 0 47%,var(--blue) 47% 73%,var(--purple) 73% 100%);position:relative}.donut:after{content:"";position:absolute;inset:19px;background:#10131b;border-radius:50%}.legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.leg{background:rgba(255,255,255,.07);border-radius:14px;padding:9px}.leg span{font-size:11px;color:#aeb6cc;font-weight:800}.leg strong{display:block;margin-top:3px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="status"><div class="brand"><div class="mark"><i class="ti ti-car"></i></div><div><h1>AutoLog</h1><span>Car management · by Carlos Pinto</span></div></div><button class="iconBtn" onclick="exportData()"><i class="ti ti-download"></i></button></div><div class="garage" id="garagePills"></div><div class="heroCard"><div class="carName" id="heroName">—</div><div class="carMeta" id="heroMeta">—</div><div class="plateWrap" id="platePreview"></div><div class="odometer"><div><div class="odoLabel">Odómetro</div><div class="odoValue" id="heroOdo">— <small>km</small></div></div><button class="quickAdd" onclick="navByName('garage')">Configurar</button></div><div class="statRow"><div class="miniStat"><span>Total</span><strong class="yellowTxt" id="sTotal">—</strong></div><div class="miniStat"><span>Litros</span><strong id="sLiters">—</strong></div><div class="miniStat"><span>L/100</span><strong class="greenTxt" id="sAvg">—</strong></div></div></div></header>
+<main class="content"><section id="screen-overview" class="screen active"></section><section id="screen-fuel" class="screen"></section><section id="screen-service" class="screen"></section><section id="screen-costs" class="screen"></section><section id="screen-garage" class="screen"></section></main>
+<nav class="tabs"><button class="tab active" onclick="nav('overview',this)"><i class="ti ti-home"></i><span>Resumo</span></button><button class="tab" onclick="nav('fuel',this)"><i class="ti ti-gas-station"></i><span>Fuel</span></button><button class="tab" onclick="nav('service',this)"><i class="ti ti-tool"></i><span>Serviço</span></button><button class="tab" onclick="nav('costs',this)"><i class="ti ti-chart-pie"></i><span>Custos</span></button><button class="tab" onclick="nav('garage',this)"><i class="ti ti-car-garage"></i><span>Garagem</span></button></nav>
+<div class="toast" id="toast"></div><div class="modalBackdrop" id="deleteModal"><div class="confirmBox"><div class="confirmIcon"><i class="ti ti-trash"></i></div><h3>Are you sure?</h3><p>Are you sure you want to delete it?</p><div class="confirmActions"><button class="primary secondary" onclick="closeDeleteModal()">No</button><button class="primary yes" onclick="confirmDelete()">Yes</button></div></div></div>
+</div>
+<script>
+const KEY='autolog_chat_canvas_v1';let pendingDelete=null;let S=JSON.parse(localStorage.getItem(KEY)||'null')||{active:'car1',cars:[{id:'car1',brand:'',model:'',year:'',fuel:'',plate:'',regYear:'',regMonth:'',odo:0,insurance:'',inspection:'',iuc:''}],fuel:[],service:[],extras:[]};
+const SERVICE_ITEMS=[['oleo','Óleo Motor','ti-droplet'],['filtro_oleo','Filtro Óleo Motor','ti-filter'],['filtro_ar','Filtro Ar','ti-air'],['injectores','Injectores','ti-spray'],['filtro_ac','Filtro AC','ti-snowflake'],['filtro_hab','Filtro Habitáculo','ti-home'],['pastilhas','Pastilhas','ti-circle'],['travoes','Travões','ti-brake'],['escovas','Escovas (Limpa Parabrisas)','ti-windmill'],['pneus','Pneus','ti-circle-dot'],['velas','Velas','ti-bolt']];
+const EXTRA_ITEMS=[['inj','Limpa Injectores Diesel','ti-spray'],['dpf','Aditivo Filtro de Partículas (DPF)','ti-air'],['motor','Aditivo Tratamento Motor Diesel','ti-engine']];
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+function isGarageAll(){return S.active==='garage_all'}
+function car(){return S.cars.find(c=>c.id===S.active)||S.cars[0]}function euro(v){return Number(v||0).toLocaleString('pt-PT',{minimumFractionDigits:0,maximumFractionDigits:2})+' €'}function km(v){return Number(v||0).toLocaleString('pt-PT')}function datePT(d){if(!d)return'—';let [y,m,day]=d.split('-');return `${day}/${m}/${y}`}function days(d){return Math.ceil((new Date(d)-new Date())/86400000)}
+function listFor(type){
+  if(isGarageAll())return (S[type]||[]);
+  const cid=car().id;
+  return (S[type]||[]).filter(x=>String(x.carId||cid)===String(cid));
+}
+function fuelList(){return listFor('fuel')}
+function serviceList(){return listFor('service')}
+function extraList(){return listFor('extras')}
+function totals(){const fuels=fuelList(),services=serviceList(),extrasList=extraList();let fuel=fuels.reduce((a,b)=>a+Number(b.total||0),0),liters=fuels.reduce((a,b)=>a+Number(b.liters||0),0),saved=fuels.reduce((a,b)=>a+Number(b.saved||0),0),service=services.reduce((a,b)=>a+Number(b.cost||0),0),extras=extrasList.reduce((a,b)=>a+Number(b.cost||0),0);let avg=0;if(fuels.length>1){avg=fuels.reduce((a,b,i,arr)=>i?a+Math.abs((Number(b.liters||0)/(Number(arr[i-1].odo||0)-Number(b.odo||0)))*100):0,0)/(fuels.length-1||1)}return{fuel,liters,saved,service,extras,total:fuel+service+extras,avg}}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function plateHTML(c){const raw=(c.plate||'').toUpperCase().replace(/[^A-Z0-9]/g,'');let code=raw.length===6?`${raw.slice(0,2)}-${raw.slice(2,4)}-${raw.slice(4,6)}`:(c.plate||'00-00-AA').toUpperCase();const yy=String(c.regYear||c.year||'18').slice(-2).padStart(2,'0');const mm=String(c.regMonth||'02').padStart(2,'0');return `<div class="plateShell"><div class="plateEU">P</div><div class="plateCode">${code}</div><div class="plateDate"><span>${yy}</span><span class="sep"></span><span>${mm}</span></div></div>`}
+function refreshTop(){
+  const c=car(),t=totals(),all=isGarageAll();
+  const garageBtn=`<button class="pill ${all?'active':''}" onclick="S.active='garage_all';save();render()"><i class="ti ti-car-garage" style="font-size:13px;margin-right:4px"></i>Garage</button>`;
+  const carBtns=S.cars.map(x=>`<button class="pill ${x.id===S.active?'active':''}" onclick="S.active='${x.id}';save();render()">${(x.brand||x.model)?`${x.brand} ${x.model}`:'Novo carro'}</button>`).join('');
+  garagePills.innerHTML=garageBtn+carBtns;
+  if(all){
+    heroName.textContent='Garage';
+    heroMeta.textContent=`${S.cars.length} carro${S.cars.length!==1?'s':''} · estatísticas gerais`;
+    platePreview.innerHTML='<div class="plateEmpty">Resumo de todos os carros</div>';
+    heroOdo.innerHTML=`${S.cars.length} <small>cars</small>`;
+  }else{
+    heroName.textContent=(c.brand||c.model)?`${c.brand} ${c.model}`:'Configura o teu carro';
+    heroMeta.textContent=[c.year,c.fuel].filter(Boolean).join(' · ')||'Adiciona os dados na Garagem';
+    platePreview.innerHTML=c.plate?plateHTML(c):'<div class="plateEmpty">Sem matrícula definida</div>';
+    heroOdo.innerHTML=`${c.odo?km(c.odo):'—'} <small>km</small>`;
+  }
+  sTotal.textContent=euro(t.total);
+  sLiters.textContent=Math.round(t.liters)+' L';
+  sAvg.textContent=t.avg?t.avg.toFixed(1):'—';
+}
+function docCard(label,date,icon){
+  if(!date)return `<div class="card docCard"><div class="docIcon"><i class="ti ${icon}"></i></div><div class="docLabel">${label}</div><div class="docValue">—</div><div class="docDate">por definir</div></div>`;
+  let d=days(date),cls=d<0?'due':d<30?'warn':'ok',txt=d<0?'Exp.':d+'d';
+  return `<div class="card docCard ${cls}"><div class="docIcon"><i class="ti ${icon}"></i></div><div class="docLabel">${label}</div><div class="docValue">${txt}</div><div class="docDate">${datePT(date)}</div></div>`
+}
+function overview(){
+  const c=car(),t=totals(),all=isGarageAll(),next=serviceList().find(x=>x.next)||{},hasNext=!!next.next,missing=!all&&!(c.brand||c.model);
+  const serviceProgress=hasNext&&c.odo?Math.max(5,Math.min(95,Math.round((c.odo/next.next)*100))):0;
+  return `<div class="sectionHead"><h2>Ações rápidas</h2></div>
+  <div class="actionGrid">
+    <button class="action y" onclick="showFuelForm()"><i class="ti ti-gas-station"></i><span>Fuel</span></button>
+    <button class="action b" onclick="showServiceForm()"><i class="ti ti-tool"></i><span>Serviço</span></button>
+    <button class="action g" onclick="openQuickOdo()"><i class="ti ti-dashboard"></i><span>Km</span></button>
+    <button class="action p" onclick="navByName('garage')"><i class="ti ti-settings"></i><span>Setup</span></button>
+  </div>
+  ${all?`<div class="welcomeCard"><div class="welcomeTop"><div class="welcomeIcon"><i class="ti ti-car-garage"></i></div><div><h3>Garage geral</h3><p>Estás a ver os gastos, litros, manutenção e extra items somados de todos os carros.</p></div></div></div>`:(missing?`<div class="welcomeCard"><div class="welcomeTop"><div class="welcomeIcon"><i class="ti ti-car"></i></div><div><h3>Bem-vindo ao AutoLog</h3><p>Começa por configurar o teu carro, matrícula, documentos e os km atuais.</p></div></div><button class="primary" style="margin-top:16px" onclick="navByName('garage')">Configurar primeiro carro</button></div>`:'')}
+  <div class="sectionHead"><h2>Próxima manutenção</h2></div>
+  <div class="card overviewService">
+    <div class="overviewServiceIcon"><i class="ti ti-tool"></i></div>
+    <div class="overviewServiceInfo">
+      <span>Serviço programado</span>
+      <strong>${hasNext?km(next.next)+' km':'Por definir'}</strong>
+      <p>${hasNext?'Faltam '+km(Math.max(0,next.next-c.odo))+' km':'Adiciona uma manutenção para criar o próximo alerta'}</p>
+      <div class="miniProgress"><div style="width:${serviceProgress}%"></div></div>
+    </div>
+  </div>
+  <div class="sectionHead"><h2>Documentos</h2></div>
+  <div class="grid2">
+    ${docCard('Seguro',c.insurance,'ti-shield-check')}
+    ${docCard('Inspeção',c.inspection,'ti-clipboard-check')}
+    ${docCard('IUC',c.iuc,'ti-file-invoice')}
+    <div class="card docCard"><div class="docIcon" style="background:#fff5dd;color:#b67a00"><i class="ti ti-pig-money"></i></div><div class="docLabel">Poupança</div><div class="docValue">0 €</div><div class="docDate">descontos fuel</div></div>
+  </div>
+  <div class="sectionHead"><h2>Resumo</h2></div>
+  <div class="grid2">
+    <div class="card cardPad"><div class="liSub">Total gasto</div><div class="liMain">${euro(t.total)}</div><div class="quickHint">Fuel + manutenção + extras</div></div>
+    <div class="card cardPad"><div class="liSub">Consumo médio</div><div class="liMain">${t.avg?t.avg.toFixed(1):'—'} L/100</div><div class="quickHint">baseado nos abastecimentos</div></div>
+  </div>`
+}
+function fuel(){const t=totals();return `<div class="sectionHead"><h2>Combustível</h2><button onclick="showFuelForm()">Adicionar</button></div><div class="grid2"><div class="card cardPad"><div class="liSub">Total pago</div><div class="liMain">${euro(t.fuel)}</div></div><div class="card cardPad"><div class="liSub">Litros</div><div class="liMain">${Math.round(t.liters)} L</div></div><div class="card cardPad"><div class="liSub">Poupança descontos</div><div class="liMain">${euro(t.saved)}</div></div><div class="card cardPad"><div class="liSub">Preço médio pago</div><div class="liMain">${t.liters? (t.fuel/t.liters).toFixed(3):'—'} €/L</div></div></div><div class="card cardPad form" id="fuelForm"><div class="inputRow"><div class="field"><label>Data</label><input id="fd" type="date" value="${new Date().toISOString().slice(0,10)}"></div><div class="field"><label>Odómetro</label><input id="fo" type="number" value="${car().odo||''}"></div></div><div class="inputRow"><div class="field"><label>Litros</label><input id="fl" type="number" step="0.01" inputmode="decimal" oninput="calcFuelPrice()"></div><div class="field"><label>Total pago real</label><input id="ft" type="number" step="0.01" inputmode="decimal" placeholder="ex: 72.40" oninput="calcFuelPrice()"></div></div><div class="calcBox"><span>Preço real pago por litro</span><strong id="fpPreview">— €/L</strong></div><div class="calcBox"><span>Total pago real</span><strong id="ftPreview">— €</strong></div><label class="discountToggle"><input id="fdiscToggle" type="checkbox" onchange="toggleFuelDiscount()"> Teve desconto?</label><div class="discountPanel" id="fdiscPanel"><div class="field"><label>Desconto por litro em cêntimos</label><input id="fdiscCents" type="number" step="0.1" inputmode="decimal" placeholder="ex: 8" oninput="calcFuelPrice()"></div><div class="calcBox" style="margin-top:10px"><span>Preço sem desconto / poupança</span><strong id="fdiscPreview">—</strong></div></div><div class="field"><label>Posto</label><select id="fs"><option>Galp</option><option>BP</option><option>Repsol</option><option>Prio</option><option>Intermarché</option></select></div><button class="primary" onclick="addFuelEntry()">Guardar abastecimento</button></div><div class="sectionHead"><h2>Histórico</h2></div><div class="card list">${fuelList().length?fuelList().map(x=>`<div class="listItem" id="fuel-${x.id}"><div><div class="liMain">${x.station} · ${x.liters.toFixed(1)} L</div><div class="liSub">${datePT(x.date)} · ${km(x.odo)} km · pago ${x.ppl.toFixed(3)} €/L${x.hasDiscount?` · sem desc. ${Number(x.fullPpl||x.ppl).toFixed(3)} €/L`:''}</div>${x.hasDiscount?`<span class="badge">Poupaste ${euro(x.saved)} · ${x.discCents} cênt/L</span>`:''}<div class="itemActions"><button class="smallBtn" onclick="editFuel('${x.id}')"><i class="ti ti-edit"></i> Editar</button><button class="smallBtn danger" onclick="askDelete('fuel','${x.id}')"><i class="ti ti-trash"></i> Remover</button></div></div><div class="amount">${euro(x.total)}</div></div>`).join(''):`<div class="empty"><i class="ti ti-gas-station"></i>Sem abastecimentos</div>`}</div>`}
+function serviceItemsHTML(){return SERVICE_ITEMS.map(([id,name,icon])=>`<label class="servicePick"><input type="checkbox" value="${name}"><span class="pickIcon"><i class="ti ${icon}"></i></span><span>${name}</span></label>`).join('')}
+function extraOptions(){return EXTRA_ITEMS.map(([id,name])=>`<option value="${id}">${name}</option>`).join('')}function extraName(id){return (EXTRA_ITEMS.find(x=>x[0]===id)||[])[1]||id}function extraIcon(id){return (EXTRA_ITEMS.find(x=>x[0]===id)||[])[2]||'ti-flask'}
+function service(){return `<div class="sectionHead"><h2>Manutenção</h2><button onclick="showServiceForm()">Adicionar</button></div><div class="card cardPad form" id="serviceForm"><div class="inputRow"><div class="field"><label>Data</label><input id="sd" type="date" value="${new Date().toISOString().slice(0,10)}"></div><div class="field"><label>Odómetro</label><input id="so" type="number" value="${car().odo||''}"></div></div><div class="field"><label>Local / Oficina</label><select id="sw"><option>ASCAR</option><option>BMW Dealer</option><option>Official dealer</option><option>Independent garage</option><option>Speedy</option><option>Midas</option><option>Euromaster</option><option>ACP</option><option>Other</option></select></div><div class="field"><label>Items de serviço</label><div class="serviceGrid">${serviceItemsHTML()}</div></div><div class="field"><label>Outro serviço / notas</label><input id="st"></div><div class="inputRow"><div class="field"><label>Custo</label><input id="sc" type="number" step="0.01"></div><div class="field"><label>Próximo km</label><input id="sn" type="number"></div></div><button class="primary" onclick="addServiceEntry()">Guardar serviço</button></div><div class="card list">${serviceList().length?serviceList().map(x=>`<div class="listItem"><div><div class="liMain">${x.title}</div><div class="liSub">${datePT(x.date)} · ${km(x.odo)} km · ${x.garage}</div>${x.next?`<span class="badge">Próximo ${km(x.next)} km</span>`:''}<div class="itemActions"><button class="smallBtn danger" onclick="askDelete('service','${x.id}')">Remover</button></div></div><div class="amount">${euro(x.cost)}</div></div>`).join(''):`<div class="empty"><i class="ti ti-tool"></i>Sem manutenções ainda</div>`}</div><div class="sectionHead"><h2>Extra items</h2><button onclick="showExtraForm()">Adicionar</button></div><div class="card cardPad form" id="extraForm"><div class="inputRow"><div class="field"><label>Data</label><input id="xd" type="date" value="${new Date().toISOString().slice(0,10)}"></div><div class="field"><label>Odómetro</label><input id="xo" type="number" value="${car().odo||''}"></div></div><div class="field"><label>Produto</label><select id="xt">${extraOptions()}</select></div><div class="inputRow"><div class="field"><label>Quantidade ml</label><input id="xml" type="number"></div><div class="field"><label>Custo</label><input id="xc" type="number" step="0.01"></div></div><div class="field"><label>Duração estimada em km</label><input id="xk" type="number"></div><button class="primary" onclick="addExtraEntry()">Guardar extra item</button></div><div class="card list">${extraList().length?extraList().map(x=>`<div class="listItem"><div><div class="liMain"><i class="ti ${extraIcon(x.type)}" style="color:var(--purple);margin-right:5px"></i>${x.title}</div><div class="liSub">${datePT(x.date)} · ${km(x.odo||0)} km · ${x.ml||'—'} ml</div><span class="badge">Válido até ${km(x.until)} km</span><div class="itemActions"><button class="smallBtn danger" onclick="askDelete('extra','${x.id}')">Remover</button></div></div><div class="amount">${euro(x.cost)}</div></div>`).join(''):`<div class="empty"><i class="ti ti-flask"></i>Sem extras registados</div>`}</div>`}
+function costs(){const t=totals();const events=[...fuelList().map(x=>({d:x.date,t:'Fuel · '+x.station,s:`${x.liters.toFixed(1)} L`,a:x.total})),...serviceList().map(x=>({d:x.date,t:x.title,s:x.garage,a:x.cost})),...extraList().map(x=>({d:x.date,t:x.title,s:`válido até ${km(x.until)} km`,a:x.cost}))].sort((a,b)=>(b.d||'').localeCompare(a.d||''));return `<div class="costHero"><div class="costTop"><div><span>Total gasto</span><h3>${euro(t.total)}</h3></div><div class="donut"></div></div><div class="legend"><div class="leg"><span><b class="dot" style="background:var(--yellow)"></b>Fuel</span><strong>${euro(t.fuel)}</strong></div><div class="leg"><span><b class="dot" style="background:var(--blue)"></b>Serviço</span><strong>${euro(t.service)}</strong></div><div class="leg"><span><b class="dot" style="background:var(--purple)"></b>Extras</span><strong>${euro(t.extras)}</strong></div><div class="leg"><span>Total</span><strong>${euro(t.total)}</strong></div></div></div><div class="sectionHead"><h2>Timeline</h2></div><div class="card list">${events.length?events.map(x=>`<div class="listItem"><div><div class="liMain">${x.t}</div><div class="liSub">${datePT(x.d)} · ${x.s}</div></div><div class="amount">${euro(x.a)}</div></div>`).join(''):`<div class="empty"><i class="ti ti-chart-pie"></i>Sem custos ainda</div>`}</div>`}
+function garage(){const c=car();return `<div class="sectionHead"><h2>Garagem</h2><button onclick="addCar()">Novo</button></div><div class="card cardPad"><div class="inputRow"><div class="field"><label>Marca</label><input id="gb" value="${c.brand}"></div><div class="field"><label>Modelo</label><input id="gm" value="${c.model}"></div></div><div class="field"><label>Km atuais do carro</label><input id="go" type="number" value="${c.odo||''}"></div><div class="inputRow"><div class="field"><label>Ano do carro</label><input id="gy" value="${c.year}"></div><div class="field"><label>Combustível</label><input id="gf" value="${c.fuel}"></div></div><div class="inputRow"><div class="field"><label>Matrícula</label><input id="gp" value="${c.plate}" oninput="livePlatePreview()"></div><div class="field"><label>Ano matrícula</label><input id="gry" value="${c.regYear||''}" maxlength="2" oninput="livePlatePreview()"></div></div><div class="field"><label>Mês matrícula</label><input id="grm" value="${c.regMonth||''}" maxlength="2" oninput="livePlatePreview()"></div><div class="garagePlatePreview" id="garagePlatePreview">${plateHTML(c)}</div><div class="inputRow"><div class="field"><label>Seguro</label><input id="gi" type="date" value="${c.insurance}"></div><div class="field"><label>Inspeção</label><input id="gip" type="date" value="${c.inspection}"></div></div><div class="field"><label>IUC</label><input id="gu" type="date" value="${c.iuc}"></div><button class="primary" onclick="saveGarage()">Guardar alterações</button></div>`}
+function render(){refreshTop();document.getElementById('screen-overview').innerHTML=overview();document.getElementById('screen-fuel').innerHTML=fuel();document.getElementById('screen-service').innerHTML=service();document.getElementById('screen-costs').innerHTML=costs();document.getElementById('screen-garage').innerHTML=garage()}
+function nav(name,el){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+name).classList.add('active');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active')}function navByName(n){document.querySelector(`.tab[onclick*="${n}"]`).click()}
+function showFuelForm(){navByName('fuel');setTimeout(()=>document.getElementById('fuelForm')?.classList.add('active'),30)}function showServiceForm(){navByName('service');setTimeout(()=>document.getElementById('serviceForm')?.classList.add('active'),30)}function showExtraForm(){navByName('service');setTimeout(()=>document.getElementById('extraForm')?.classList.add('active'),30)}
+function numFrom(id){const el=document.getElementById(id);const raw=String(el?.value||'').replace(',','.');const n=parseFloat(raw);return Number.isFinite(n)?n:0}
+function calcFuelPrice(){
+  const liters=numFrom('fl');
+  const total=numFrom('ft');
+  const disc=document.getElementById('fdiscToggle')?.checked ? numFrom('fdiscCents') : 0;
+  const pp=document.getElementById('fpPreview');
+  const tp=document.getElementById('ftPreview');
+  const dp=document.getElementById('fdiscPreview');
+  const paid=liters>0 ? total/liters : 0;
+  const base=paid+(disc/100);
+  const saved=liters*(disc/100);
+  if(pp)pp.textContent=(liters>0&&total>0?paid.toFixed(3):'—')+' €/L';
+  if(tp)tp.textContent=(total>0?total.toFixed(2):'—')+' €';
+  if(dp){
+    if(liters>0&&total>0&&disc>0){
+      dp.textContent='pagaste '+paid.toFixed(3)+' €/L · sem desconto seria '+base.toFixed(3)+' €/L · poupaste '+saved.toFixed(2)+' €';
+    }else{
+      dp.textContent='—';
+    }
+  }
+}
+function toggleFuelDiscount(){const panel=document.getElementById('fdiscPanel');if(panel)panel.classList.toggle('active',document.getElementById('fdiscToggle')?.checked);calcFuelPrice()}
+function addFuelEntry(){
+  const liters=numFrom('fl'),total=numFrom('ft'),odo=numFrom('fo');
+  if(!liters||!total||!odo)return toast('Preenche litros, total pago e odómetro');
+  const hasDiscount=!!document.getElementById('fdiscToggle')?.checked;
+  const discCents=hasDiscount?numFrom('fdiscCents'):0;
+  if(hasDiscount && discCents<=0)return toast('Indica os cêntimos de desconto');
+  const paidPpl=total/liters;
+  const saved=hasDiscount?liters*(discCents/100):0;
+  const basePpl=paidPpl+(discCents/100);
+  S.fuel.unshift({id:Date.now(),carId:car().id,date:fd.value,odo,liters,total,ppl:paidPpl,station:fs.value,type:'Regular',hasDiscount,discCents,saved,fullPpl:basePpl,fullTotal:total+saved});
+  car().odo=Math.max(car().odo,odo);
+  save();
+  render();
+  toast('Abastecimento guardado');
+}
+function editFuel(id){
+  const x=S.fuel.find(f=>String(f.id)===String(id));
+  if(!x)return;
+  const row=document.getElementById('fuel-'+id);
+  if(!row)return;
+  row.innerHTML=`<div style="flex:1;width:100%"><div class="liMain">Editar abastecimento</div><div class="serviceEdit"><div class="inputRow"><div class="field"><label>Data</label><input id="ef-date-${id}" type="date" value="${x.date}"></div><div class="field"><label>Odómetro</label><input id="ef-odo-${id}" type="number" value="${x.odo}"></div></div><div class="inputRow"><div class="field"><label>Litros</label><input id="ef-liters-${id}" type="number" step="0.01" value="${x.liters}"></div><div class="field"><label>Total pago</label><input id="ef-total-${id}" type="number" step="0.01" value="${x.total}"></div></div><div class="field"><label>Posto</label><input id="ef-station-${id}" value="${String(x.station||'').replace(/"/g,'&quot;')}"></div><label class="discountToggle"><input id="ef-hasdisc-${id}" type="checkbox" ${x.hasDiscount?'checked':''}> Teve desconto?</label><div class="field"><label>Desconto cênt/L</label><input id="ef-disc-${id}" type="number" step="0.1" value="${x.discCents||''}"></div><div class="inputRow"><button class="secondary" onclick="render()">Cancelar</button><button class="primary" onclick="saveFuelEdit('${id}')">Guardar</button></div></div></div>`;
+}
+function saveFuelEdit(id){
+  const x=S.fuel.find(f=>String(f.id)===String(id));
+  if(!x)return;
+  const liters=parseFloat(String(document.getElementById('ef-liters-'+id).value||'').replace(',','.'))||0;
+  const total=parseFloat(String(document.getElementById('ef-total-'+id).value||'').replace(',','.'))||0;
+  const odo=parseFloat(String(document.getElementById('ef-odo-'+id).value||'').replace(',','.'))||0;
+  if(!liters||!total||!odo)return toast('Preenche litros, total pago e odómetro');
+  const hasDiscount=!!document.getElementById('ef-hasdisc-'+id).checked;
+  const discCents=hasDiscount?(parseFloat(String(document.getElementById('ef-disc-'+id).value||'').replace(',','.'))||0):0;
+  if(hasDiscount&&discCents<=0)return toast('Indica os cêntimos de desconto');
+  const paidPpl=total/liters;
+  const saved=hasDiscount?liters*(discCents/100):0;
+  x.date=document.getElementById('ef-date-'+id).value;
+  x.odo=odo;
+  x.liters=liters;
+  x.total=total;
+  x.ppl=paidPpl;
+  x.station=document.getElementById('ef-station-'+id).value||'Posto';
+  x.hasDiscount=hasDiscount;
+  x.discCents=discCents;
+  x.saved=saved;
+  x.fullPpl=paidPpl+(discCents/100);
+  x.fullTotal=total+saved;
+  car().odo=Math.max(car().odo,odo);
+  save();render();toast('Abastecimento atualizado');
+}
+function addServiceEntry(){const picked=[...document.querySelectorAll('#serviceForm .servicePick input:checked')].map(x=>x.value);const note=st.value.trim();const cost=+sc.value,odo=+so.value;if((!picked.length&&!note)||!cost||!odo)return toast('Seleciona items, custo e odómetro');const title=[...picked,note].filter(Boolean).join(' + ');S.service.unshift({id:Date.now(),carId:car().id,date:sd.value,odo,title,garage:sw.value||'Oficina',cost,next:+sn.value||''});car().odo=Math.max(car().odo,odo);save();render();toast('Serviço guardado')}
+function parseNum(id){
+  const el=document.getElementById(id);
+  if(!el)return 0;
+  const raw=String(el.value||'').trim().replace(',', '.');
+  const n=parseFloat(raw);
+  return Number.isFinite(n)?n:0;
+}
+function val(id){
+  const el=document.getElementById(id);
+  return el?String(el.value||'').trim():'';
+}
+function addExtraEntry(){
+  const type=val('xt');
+  const date=val('xd')||new Date().toISOString().slice(0,10);
+  const odo=parseNum('xo');
+  const ml=parseNum('xml');
+  const cost=parseNum('xc');
+  const dur=parseNum('xk');
+
+  const missing=[];
+  if(!type)missing.push('produto');
+  if(odo<=0)missing.push('odómetro');
+  if(ml<=0)missing.push('ml');
+  if(cost<=0)missing.push('custo');
+  if(dur<=0)missing.push('duração');
+
+  if(missing.length){
+    toast('Falta: '+missing.join(', '));
+    return;
+  }
+
+  S.extras.unshift({id:Date.now(),carId:car().id,type,title:extraName(type),date,odo,ml,cost,dur,until:odo+dur});
+  car().odo=Math.max(car().odo,odo);
+  save();
+  render();
+  navByName('service');
+  toast('Extra item guardado');
+}
+function askDelete(type,id){pendingDelete={type,id};deleteModal.classList.add('show')}function closeDeleteModal(){pendingDelete=null;deleteModal.classList.remove('show')}function confirmDelete(){if(!pendingDelete)return closeDeleteModal();if(pendingDelete.type==='fuel')S.fuel=S.fuel.filter(x=>String(x.id)!==String(pendingDelete.id));if(pendingDelete.type==='fuel')S.fuel=S.fuel.filter(x=>String(x.id)!==String(pendingDelete.id));if(pendingDelete.type==='service')S.service=S.service.filter(x=>String(x.id)!==String(pendingDelete.id));if(pendingDelete.type==='extra')S.extras=S.extras.filter(x=>String(x.id)!==String(pendingDelete.id));closeDeleteModal();save();render();toast('Registo removido')}
+function openQuickOdo(){const v=prompt('Novo odómetro atual:',car().odo||'');if(!v)return;car().odo=+v||0;save();render();toast('Odómetro atualizado')}function livePlatePreview(){garagePlatePreview.innerHTML=plateHTML({plate:gp.value,year:gy.value,regYear:gry.value,regMonth:grm.value})}function saveGarage(){const c=car();c.brand=gb.value;c.model=gm.value;c.odo=+go.value||0;c.year=gy.value;c.fuel=gf.value;c.plate=gp.value;c.regYear=gry.value;c.regMonth=grm.value;c.insurance=gi.value;c.inspection=gip.value;c.iuc=gu.value;save();render();toast('Garagem guardada')}
+function addCar(){const id='car'+Date.now();S.cars.push({id,brand:'',model:'',year:'',fuel:'',plate:'',regYear:'',regMonth:'',odo:0,insurance:'',inspection:'',iuc:''});S.active=id;save();render();navByName('garage')}function exportData(){const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='autolog-backup.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exportado')}
+render();
+</script>
+</body></html>
